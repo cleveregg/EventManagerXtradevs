@@ -1,7 +1,6 @@
 <script>
 import { Head, Link, router } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import FlashMessage from '@/Components/FlashMessage.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
 export default {
@@ -9,7 +8,6 @@ export default {
         Head,
         Link,
         AuthenticatedLayout,
-        FlashMessage,
         DangerButton,
     },
     props: {
@@ -70,60 +68,22 @@ export default {
 <template>
     <Head :title="event.name" />
 
-    <div class="min-h-screen bg-gray-100">
-        <!-- Navigation -->
-        <nav class="border-b border-gray-100 bg-white">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 justify-between items-center">
-                    <div class="flex items-center">
-                        <Link href="/" class="text-xl font-bold text-gray-800">
-                            Események
-                        </Link>
-                    </div>
+    <AuthenticatedLayout>
+        <template #header>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                {{ event.name }}
+            </h2>
+        </template>
 
-                    <div class="flex items-center space-x-4">
-                        <template v-if="$page.props.auth.user">
-                            <span class="text-sm text-gray-700">{{ $page.props.auth.user.name }}</span>
-                            <Link
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                                class="text-sm text-gray-700 hover:text-gray-900"
-                            >
-                                Kijelentkezés
-                            </Link>
-                        </template>
-                        <template v-else>
-                            <Link
-                                :href="route('login')"
-                                class="text-sm text-gray-700 hover:text-gray-900"
-                            >
-                                Bejelentkezés
-                            </Link>
-                            <Link
-                                :href="route('register')"
-                                class="text-sm text-gray-700 hover:text-gray-900"
-                            >
-                                Regisztráció
-                            </Link>
-                        </template>
-                    </div>
+        <div class="py-12">
+            <div class="mx-auto max-w-4xl sm:px-6 lg:px-8">
+                <div class="mb-6">
+                    <Link :href="route('events.index')" class="text-indigo-600 hover:text-indigo-900 text-sm">
+                        &larr; Vissza az eseményekhez
+                    </Link>
                 </div>
-            </div>
-        </nav>
 
-        <!-- Flash Messages -->
-        <FlashMessage :flash="$page.props.flash" />
-
-        <!-- Content -->
-        <div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-            <div class="mb-6">
-                <Link href="/" class="text-indigo-600 hover:text-indigo-900 text-sm">
-                    &larr; Vissza az eseményekhez
-                </Link>
-            </div>
-
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <!-- Image -->
                 <div v-if="imageUrl" class="h-64 sm:h-80 w-full overflow-hidden flex items-center justify-center">
                     <img
@@ -191,7 +151,7 @@ export default {
                         <p class="whitespace-pre-line">{{ event.description }}</p>
                     </div>
 
-                    <div class="mt-6" v-if="isLoggedIn && !isCreator">
+                    <div class="mt-6" v-if="isLoggedIn">
                         <button
                             v-if="isRegistered"
                             disabled
@@ -216,6 +176,7 @@ export default {
                     </div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
+    </AuthenticatedLayout>
 </template>

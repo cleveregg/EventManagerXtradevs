@@ -37,11 +37,11 @@ export default {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Profile Information
+                Profil információk
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
+                Frissítse fiókja profil információit és e-mail címét.
             </p>
         </header>
 
@@ -50,7 +50,7 @@ export default {
             class="mt-6 space-y-6"
         >
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Név" />
 
                 <TextInput
                     id="name"
@@ -66,7 +66,7 @@ export default {
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -82,14 +82,14 @@ export default {
 
             <div v-if="mustVerifyEmail && $page.props.auth.user.email_verified_at === null">
                 <p class="mt-2 text-sm text-gray-800">
-                    Your email address is unverified.
+                    Az e-mail címe nincs hitelesítve.
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
                         class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                        Click here to re-send the verification email.
+                        Kattintson ide a hitelesítő e-mail újraküldéséhez.
                     </Link>
                 </p>
 
@@ -97,12 +97,12 @@ export default {
                     v-show="status === 'verification-link-sent'"
                     class="mt-2 text-sm font-medium text-green-600"
                 >
-                    A new verification link has been sent to your email address.
+                    Új hitelesítő link került elküldésre az e-mail címére.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Mentés</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -114,7 +114,7 @@ export default {
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600"
                     >
-                        Saved.
+                        Mentve.
                     </p>
                 </Transition>
             </div>

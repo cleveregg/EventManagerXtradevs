@@ -37,12 +37,11 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Forgot Password" />
+        <Head title="Elfelejtett jelszó" />
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email
-            address and we will email you a password reset link that will allow
-            you to choose a new one.
+            Elfelejtette a jelszavát? Semmi gond. Adja meg az e-mail címét,
+            és küldünk egy jelszó-visszaállító linket.
         </div>
 
         <div
@@ -54,7 +53,7 @@ export default {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -74,7 +73,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Email Password Reset Link
+                    Jelszó-visszaállító link küldése
                 </PrimaryButton>
             </div>
         </form>

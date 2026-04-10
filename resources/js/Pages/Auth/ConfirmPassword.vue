@@ -34,16 +34,16 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Confirm Password" />
+        <Head title="Jelszó megerősítése" />
 
         <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your
-            password before continuing.
+            Ez az alkalmazás egy védett területe. Kérjük, erősítse meg
+            a jelszavát a továbblépéshez.
         </div>
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Jelszó" />
                 <TextInput
                     id="password"
                     type="password"
@@ -62,7 +62,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Confirm
+                    Megerősítés
                 </PrimaryButton>
             </div>
         </form>

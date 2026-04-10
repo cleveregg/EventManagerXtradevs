@@ -38,11 +38,11 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Regisztráció" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="name" value="Név" />
 
                 <TextInput
                     id="name"
@@ -58,7 +58,7 @@ export default {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -73,7 +73,7 @@ export default {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Jelszó" />
 
                 <TextInput
                     id="password"
@@ -90,7 +90,7 @@ export default {
             <div class="mt-4">
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Jelszó megerősítése"
                 />
 
                 <TextInput
@@ -113,7 +113,7 @@ export default {
                     :href="route('login')"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                    Already registered?
+                    Már regisztráltál?
                 </Link>
 
                 <PrimaryButton
@@ -121,7 +121,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
+                    Regisztráció
                 </PrimaryButton>
             </div>
         </form>

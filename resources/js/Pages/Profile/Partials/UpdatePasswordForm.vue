@@ -46,18 +46,18 @@ export default {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900">
-                Update Password
+                Jelszó módosítása
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                Ensure your account is using a long, random password to stay
-                secure.
+                Használjon hosszú, véletlen jelszót a fiókja biztonsága
+                érdekében.
             </p>
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="current_password" value="Current Password" />
+                <InputLabel for="current_password" value="Jelenlegi jelszó" />
 
                 <TextInput
                     id="current_password"
@@ -75,7 +75,7 @@ export default {
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password" />
+                <InputLabel for="password" value="Új jelszó" />
 
                 <TextInput
                     id="password"
@@ -92,7 +92,7 @@ export default {
             <div>
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Jelszó megerősítése"
                 />
 
                 <TextInput
@@ -110,7 +110,7 @@ export default {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Mentés</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -122,7 +122,7 @@ export default {
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600"
                     >
-                        Saved.
+                        Mentve.
                     </p>
                 </Transition>
             </div>

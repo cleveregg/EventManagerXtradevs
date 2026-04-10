@@ -47,11 +47,11 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Reset Password" />
+        <Head title="Jelszó visszaállítása" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -67,7 +67,7 @@ export default {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Jelszó" />
 
                 <TextInput
                     id="password"
@@ -84,7 +84,7 @@ export default {
             <div class="mt-4">
                 <InputLabel
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Jelszó megerősítése"
                 />
 
                 <TextInput
@@ -107,7 +107,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Reset Password
+                    Jelszó visszaállítása
                 </PrimaryButton>
             </div>
         </form>

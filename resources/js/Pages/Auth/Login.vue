@@ -47,7 +47,7 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head title="Bejelentkezés" />
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
@@ -55,7 +55,7 @@ export default {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -71,7 +71,7 @@ export default {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Jelszó" />
 
                 <TextInput
                     id="password"
@@ -89,7 +89,7 @@ export default {
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
+                        >Emlékezz rám</span
                     >
                 </label>
             </div>
@@ -100,7 +100,7 @@ export default {
                     :href="route('password.request')"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                    Forgot your password?
+                    Elfelejtett jelszó?
                 </Link>
 
                 <PrimaryButton
@@ -108,7 +108,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Log in
+                    Bejelentkezés
                 </PrimaryButton>
             </div>
         </form>

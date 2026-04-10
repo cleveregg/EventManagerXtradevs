@@ -95,14 +95,14 @@ export default {
                                         <DropdownLink
                                             :href="route('profile.edit')"
                                         >
-                                            Profile
+                                            Profil
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Kijelentkezés
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -192,14 +192,14 @@ export default {
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
+                                Profil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 :href="route('logout')"
                                 method="post"
                                 as="button"
                             >
-                                Log Out
+                                Kijelentkezés
                             </ResponsiveNavLink>
                         </div>
                     </div>

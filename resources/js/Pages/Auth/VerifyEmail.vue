@@ -35,20 +35,20 @@ export default {
 
 <template>
     <GuestLayout>
-        <Head title="Email Verification" />
+        <Head title="E-mail hitelesítés" />
 
         <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your
-            email address by clicking on the link we just emailed to you? If you
-            didn't receive the email, we will gladly send you another.
+            Köszönjük a regisztrációt! Mielőtt elkezdenéd használni a fiókodat,
+            kérjük, erősítsd meg az e-mail címedet az általunk küldött linkre kattintva.
+            Ha nem kaptad meg az e-mailt, szívesen küldünk másikat.
         </div>
 
         <div
             class="mb-4 text-sm font-medium text-green-600"
             v-if="verificationLinkSent"
         >
-            A new verification link has been sent to the email address you
-            provided during registration.
+            Új hiteleső link került elküdésre a regisztráció során megadott
+            e-mail címre.
         </div>
 
         <form @submit.prevent="submit">
@@ -57,7 +57,7 @@ export default {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Resend Verification Email
+                    Hitelesítő e-mail újraküldése
                 </PrimaryButton>
 
                 <Link
@@ -65,7 +65,7 @@ export default {
                     method="post"
                     as="button"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >Log Out</Link
+                    >Kijelentkezés</Link
                 >
             </div>
         </form>
