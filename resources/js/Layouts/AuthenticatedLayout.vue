@@ -2,6 +2,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import FlashMessage from '@/Components/FlashMessage.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
@@ -11,6 +12,7 @@ export default {
         ApplicationLogo,
         Dropdown,
         DropdownLink,
+        FlashMessage,
         NavLink,
         ResponsiveNavLink,
         Link,
@@ -191,6 +193,9 @@ export default {
                     </div>
                 </div>
             </nav>
+
+            <!-- Flash Messages -->
+            <FlashMessage :flash="$page.props.flash" />
 
             <!-- Page Heading -->
             <header
