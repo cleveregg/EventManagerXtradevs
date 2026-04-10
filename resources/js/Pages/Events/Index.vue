@@ -38,10 +38,19 @@ export default {
                     <div class="flex items-center space-x-4">
                         <template v-if="$page.props.auth.user">
                             <Link
-                                :href="route('dashboard')"
+                                :href="route('events.create')"
+                                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                            >
+                                Új esemény
+                            </Link>
+                            <span class="text-sm text-gray-700">{{ $page.props.auth.user.name }}</span>
+                            <Link
+                                :href="route('logout')"
+                                method="post"
+                                as="button"
                                 class="text-sm text-gray-700 hover:text-gray-900"
                             >
-                                Dashboard
+                                Kijelentkezés
                             </Link>
                         </template>
                         <template v-else>

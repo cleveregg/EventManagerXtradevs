@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+    <Link :href="route('events.show', event.id)" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-200">
         <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
             <img
                 v-if="imageUrl"
@@ -89,5 +89,5 @@ export default {
                 </span>
             </div>
         </div>
-    </div>
+    </Link>
 </template>
