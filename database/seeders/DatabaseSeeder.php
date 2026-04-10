@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Event;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +13,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        $user1 = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $user2 = User::factory()->create([
+            'name' => 'Jane Doe',
+            'email' => 'jane@example.com',
+        ]);
+
+        // Future events for user 1
+        Event::factory(5)->for($user1)->create();
+        Event::factory(2)->for($user1)->smallLimit()->create();
+
+        // Future events for user 2
+        Event::factory(5)->for($user2)->create();
+        Event::factory(2)->for($user2)->smallLimit()->create();
+
+        // Past events (for testing "future only" filter)
+        Event::factory(2)->for($user1)->past()->create();
+        Event::factory(2)->for($user2)->past()->create();
     }
 }
