@@ -1,6 +1,6 @@
 <script>
 import { Head, Link } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import CommonLayout from '@/Layouts/CommonLayout.vue';
 import EventCard from '@/Components/EventCard.vue';
 import Pagination from '@/Components/Pagination.vue';
 
@@ -8,7 +8,7 @@ export default {
     components: {
         Head,
         Link,
-        AuthenticatedLayout,
+        CommonLayout,
         EventCard,
         Pagination,
     },
@@ -24,7 +24,7 @@ export default {
 <template>
     <Head title="Események" />
 
-    <AuthenticatedLayout>
+    <CommonLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Közelgő események
@@ -51,5 +51,5 @@ export default {
                 <Pagination :links="events.links" />
             </div>
         </div>
-    </AuthenticatedLayout>
+    </CommonLayout>
 </template>

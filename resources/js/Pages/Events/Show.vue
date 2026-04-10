@@ -1,13 +1,13 @@
 <script>
 import { Head, Link, router } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import CommonLayout from '@/Layouts/CommonLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
 export default {
     components: {
         Head,
         Link,
-        AuthenticatedLayout,
+        CommonLayout,
         DangerButton,
     },
     props: {
@@ -68,7 +68,7 @@ export default {
 <template>
     <Head :title="event.name" />
 
-    <AuthenticatedLayout>
+    <CommonLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 {{ event.name }}
@@ -178,5 +178,5 @@ export default {
             </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </CommonLayout>
 </template>

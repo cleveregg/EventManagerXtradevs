@@ -1,5 +1,5 @@
 <script>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import CommonLayout from '@/Layouts/CommonLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
@@ -7,7 +7,7 @@ import { Head } from '@inertiajs/vue3';
 
 export default {
     components: {
-        AuthenticatedLayout,
+        CommonLayout,
         DeleteUserForm,
         UpdatePasswordForm,
         UpdateProfileInformationForm,
@@ -27,7 +27,7 @@ export default {
 <template>
     <Head title="Profil" />
 
-    <AuthenticatedLayout>
+    <CommonLayout>
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
@@ -61,5 +61,5 @@ export default {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </CommonLayout>
 </template>

@@ -22,6 +22,11 @@ export default {
             showingNavigationDropdown: false,
         };
     },
+    computed: {
+        isAuthenticated() {
+            return !!this.$page.props.auth.user;
+        },
+    },
 };
 </script>
 
@@ -55,6 +60,7 @@ export default {
                                     Események
                                 </NavLink>
                                 <NavLink
+                                    v-if="isAuthenticated"
                                     :href="route('events.create')"
                                     :active="route().current('events.create')"
                                 >
@@ -63,8 +69,8 @@ export default {
                             </div>
                         </div>
 
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
+                        <!-- Authenticated: Settings Dropdown -->
+                        <div v-if="isAuthenticated" class="hidden sm:ms-6 sm:flex sm:items-center">
                             <div class="relative ms-3">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
@@ -107,6 +113,22 @@ export default {
                                     </template>
                                 </Dropdown>
                             </div>
+                        </div>
+
+                        <!-- Guest: Login/Register links -->
+                        <div v-else class="hidden sm:ms-6 sm:flex sm:items-center sm:space-x-4">
+                            <Link
+                                :href="route('login')"
+                                class="text-sm text-gray-700 hover:text-gray-900"
+                            >
+                                Bejelentkezés
+                            </Link>
+                            <Link
+                                :href="route('register')"
+                                class="text-sm text-gray-700 hover:text-gray-900"
+                            >
+                                Regisztráció
+                            </Link>
                         </div>
 
                         <!-- Hamburger -->
@@ -168,6 +190,7 @@ export default {
                             Események
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
+                            v-if="isAuthenticated"
                             :href="route('events.create')"
                             :active="route().current('events.create')"
                         >
@@ -175,8 +198,9 @@ export default {
                         </ResponsiveNavLink>
                     </div>
 
-                    <!-- Responsive Settings Options -->
+                    <!-- Responsive Settings Options (authenticated) -->
                     <div
+                        v-if="isAuthenticated"
                         class="border-t border-gray-200 pb-1 pt-4"
                     >
                         <div class="px-4">
@@ -200,6 +224,21 @@ export default {
                                 as="button"
                             >
                                 Kijelentkezés
+                            </ResponsiveNavLink>
+                        </div>
+                    </div>
+
+                    <!-- Responsive Guest Options -->
+                    <div
+                        v-else
+                        class="border-t border-gray-200 pb-1 pt-4"
+                    >
+                        <div class="space-y-1">
+                            <ResponsiveNavLink :href="route('login')">
+                                Bejelentkezés
+                            </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('register')">
+                                Regisztráció
                             </ResponsiveNavLink>
                         </div>
                     </div>

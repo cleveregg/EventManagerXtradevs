@@ -1,13 +1,13 @@
 <script>
 import { Head, Link } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import CommonLayout from '@/Layouts/CommonLayout.vue';
 import EventForm from '@/Components/EventForm.vue';
 
 export default {
     components: {
         Head,
         Link,
-        AuthenticatedLayout,
+        CommonLayout,
         EventForm,
     },
 };
@@ -16,7 +16,7 @@ export default {
 <template>
     <Head title="Új esemény" />
 
-    <AuthenticatedLayout>
+    <CommonLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 Új esemény létrehozása
@@ -30,5 +30,5 @@ export default {
                 </div>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </CommonLayout>
 </template>
