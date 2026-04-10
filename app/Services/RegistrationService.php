@@ -4,16 +4,19 @@ namespace App\Services;
 
 use App\Exceptions\AlreadyRegisteredException;
 use App\Exceptions\EventFullException;
+use App\Mail\NewRegistrationNotification;
+use App\Mail\RegistrationConfirmation;
 use App\Models\Event;
 use App\Models\Registration;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationService
 {
     public function registerUserForEvent(User $user, Event $event): Registration
     {
-        return DB::transaction(function () use ($user, $event) {
+        $registration = DB::transaction(function () use ($user, $event) {
             $event = Event::lockForUpdate()->find($event->id);
 
             $currentCount = $event->registrations()->count();
@@ -31,5 +34,10 @@ class RegistrationService
                 'event_id' => $event->id,
             ]);
         });
+
+        Mail::to($user)->queue(new RegistrationConfirmation($event));
+        Mail::to($event->user)->queue(new NewRegistrationNotification($event, $user));
+
+        return $registration;
     }
 }
