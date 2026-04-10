@@ -61,11 +61,11 @@ export default {
                 </PrimaryButton>
 
                 <Link
-                    :href="route('logout')"
-                    method="post"
+                    :href="route('events.index')"
+                    method="get"
                     as="button"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >Kijelentkezés</Link
+                    >Események</Link
                 >
             </div>
         </form>

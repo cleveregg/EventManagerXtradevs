@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EventController::class, 'index'])->name('events.index');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('events', EventController::class)->except(['index']);
     Route::post('/events/{event}/register', [RegistrationController::class, 'store'])->name('events.register');
 
