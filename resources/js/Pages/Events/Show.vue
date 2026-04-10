@@ -44,12 +44,24 @@ export default {
             const user = this.$page.props.auth.user;
             return user && user.id === this.event.user_id;
         },
+        isLoggedIn() {
+            return !!this.$page.props.auth.user;
+        },
+        isRegistered() {
+            const ids = this.$page.props.auth.registeredEventIds || [];
+            return ids.includes(this.event.id);
+        },
     },
     methods: {
         deleteEvent() {
             if (confirm('Biztosan törölni szeretné ezt az eseményt?')) {
                 router.delete(route('events.destroy', this.event.id));
             }
+        },
+        register() {
+            router.post(route('events.register', this.event.id), {}, {
+                preserveScroll: true,
+            });
         },
     },
 };
@@ -113,11 +125,11 @@ export default {
 
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <!-- Image -->
-                <div v-if="imageUrl" class="h-64 sm:h-80 w-full overflow-hidden">
+                <div v-if="imageUrl" class="h-64 sm:h-80 w-full overflow-hidden flex items-center justify-center">
                     <img
                         :src="imageUrl"
                         :alt="event.name"
-                        class="w-full h-full object-cover"
+                        class="h-full object-contain"
                     />
                 </div>
                 <div v-else class="h-64 sm:h-80 w-full bg-gray-200 flex items-center justify-center">
@@ -177,6 +189,30 @@ export default {
 
                     <div v-if="event.description" class="mt-6 prose max-w-none text-gray-700">
                         <p class="whitespace-pre-line">{{ event.description }}</p>
+                    </div>
+
+                    <div class="mt-6" v-if="isLoggedIn && !isCreator">
+                        <button
+                            v-if="isRegistered"
+                            disabled
+                            class="rounded-md bg-gray-300 px-4 py-2 text-sm font-semibold text-gray-500 cursor-not-allowed"
+                        >
+                            Már jelentkeztél
+                        </button>
+                        <button
+                            v-else-if="isFull"
+                            disabled
+                            class="rounded-md bg-red-100 px-4 py-2 text-sm font-semibold text-red-800 cursor-not-allowed"
+                        >
+                            BETELT
+                        </button>
+                        <button
+                            v-else
+                            @click="register"
+                            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+                        >
+                            Jelentkezem
+                        </button>
                     </div>
                 </div>
             </div>

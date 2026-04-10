@@ -33,6 +33,9 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'registeredEventIds' => fn () => $request->user()
+                    ? $request->user()->registeredEvents()->pluck('events.id')->toArray()
+                    : [],
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

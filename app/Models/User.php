@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function registeredEvents(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'registrations')->withPivot('created_at');
+    }
 }

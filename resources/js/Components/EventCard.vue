@@ -1,5 +1,5 @@
 <script>
-import { Link } from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 
 export default {
     components: {
@@ -38,56 +38,96 @@ export default {
             }
             return null;
         },
+        isLoggedIn() {
+            return !!this.$page.props.auth.user;
+        },
+        isRegistered() {
+            const ids = this.$page.props.auth.registeredEventIds || [];
+            return ids.includes(this.event.id);
+        },
+    },
+    methods: {
+        register() {
+            router.post(route('events.register', this.event.id), {}, {
+                preserveScroll: true,
+            });
+        },
     },
 };
 </script>
 
 <template>
-    <Link :href="route('events.show', event.id)" class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-200">
-        <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
-            <img
-                v-if="imageUrl"
-                :src="imageUrl"
-                :alt="event.name"
-                class="w-full h-full object-cover"
-            />
-            <svg
-                v-else
-                class="h-16 w-16 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-200">
+        <Link :href="route('events.show', event.id)" class="block">
+            <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                <img
+                    v-if="imageUrl"
+                    :src="imageUrl"
+                    :alt="event.name"
+                    class="h-full object-contain"
                 />
-            </svg>
-        </div>
-
-        <div class="p-4 flex flex-col flex-1">
-            <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ event.name }}</h3>
-
-            <p class="text-sm text-gray-600 mb-3 flex-1">{{ truncatedDescription }}</p>
-
-            <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-500">{{ formattedDate }}</span>
-                <span
-                    v-if="isFull"
-                    class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"
-                >
-                    BETELT
-                </span>
-                <span
+                <svg
                     v-else
-                    class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
+                    class="h-16 w-16 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
                 >
-                    {{ availableSpots }} szabad hely
-                </span>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                    />
+                </svg>
             </div>
+
+            <div class="p-4 flex flex-col flex-1">
+                <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ event.name }}</h3>
+
+                <p class="text-sm text-gray-600 mb-3 flex-1">{{ truncatedDescription }}</p>
+
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-gray-500">{{ formattedDate }}</span>
+                    <span
+                        v-if="isFull"
+                        class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800"
+                    >
+                        BETELT
+                    </span>
+                    <span
+                        v-else
+                        class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800"
+                    >
+                        {{ availableSpots }} szabad hely
+                    </span>
+                </div>
+            </div>
+        </Link>
+
+        <div class="px-4 pb-4" v-if="isLoggedIn">
+            <button
+                v-if="isRegistered"
+                disabled
+                class="w-full rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-gray-500 cursor-not-allowed"
+            >
+                Már jelentkeztél
+            </button>
+            <button
+                v-else-if="isFull"
+                disabled
+                class="w-full rounded-md bg-red-100 px-3 py-2 text-sm font-semibold text-red-800 cursor-not-allowed"
+            >
+                BETELT
+            </button>
+            <button
+                v-else
+                @click="register"
+                class="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+            >
+                Jelentkezem
+            </button>
         </div>
-    </Link>
+    </div>
 </template>

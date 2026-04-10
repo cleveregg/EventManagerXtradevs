@@ -64,10 +64,15 @@ export default {
         },
         submit() {
             if (this.isEditing) {
-                this.form.post(route('events.update', this.event.id), {
-                    _method: 'PUT',
-                    forceFormData: true,
-                });
+                this.form
+                    .transform((data) => ({
+                        ...data,
+                        _method: 'PUT',
+                    }))
+                    .post(route('events.update', this.event.id), {
+                        forceFormData: true,
+                        preserveScroll: true,
+                    });
             } else {
                 this.form.post(route('events.store'), {
                     forceFormData: true,

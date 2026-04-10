@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\EventController;
+use App\Http\Controllers\Web\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EventController::class, 'index'])->name('events.index');
 
 Route::middleware('auth')->group(function () {
     Route::resource('events', EventController::class)->except(['index']);
+    Route::post('/events/{event}/register', [RegistrationController::class, 'store'])->name('events.register');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
