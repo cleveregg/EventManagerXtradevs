@@ -24,7 +24,7 @@ A full-stack web application where users can create events, register for them, a
 ## Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/cleveregg/EventManagerXtradevs
 cd EventManagerXtradevs
 composer install
 npm install
@@ -33,7 +33,8 @@ php artisan key:generate
 # Configure database in .env
 php artisan migrate --seed
 php artisan storage:link
-npm run dev
+npm run build
+php artisan serve
 # In a separate terminal:
 php artisan queue:work
 ```
